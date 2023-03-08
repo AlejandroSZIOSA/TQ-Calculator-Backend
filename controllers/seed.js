@@ -32,12 +32,12 @@ exports.createSeed = (req,res,next) =>{
   //parse to json for send and request data :)
   const name = req.body.name;
   const weightPerSquareMeter= req.body.weightPerSquareMeter;
-    
+  const creator = req.body.creator;
     //create post in db
     const seed = new Seed({
       name: name,
       weightPerSquareMeter: weightPerSquareMeter,
-      creator:'Admin',
+      creator:creator, // todo: refactor!
     });
     //save the data in DB
     seed
