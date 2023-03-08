@@ -12,7 +12,7 @@ exports.createSeed = (req,res,next) =>{
   const tips = req.body.tips;
     //create post in db
     res.status(201).json({
-      message: 'Post Created',
+      message: 'Seed Created',
       seed:{ 
         id: new Date().toISOString(),
         name: name,

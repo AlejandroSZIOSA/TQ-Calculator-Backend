@@ -8,6 +8,14 @@ const app = express();
 
 app.use(bodyParser.json()); //Parse data from incoming requests
 
+//Fixing CORDS problem in the browser
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-allow-origin' , '*');
+  res.setHeader('Access-Control-allow-methods', 'GET,POST,PUT');
+  res.setHeader('Access-Control-allow-headers', 'Content-Type,Authorization');
+  next();//continue
+})
+
 //Passing a path and the functionality
 //this is an Express expression
 app.use('/seed',seedRoutes); //Initiating the seed routes
