@@ -1,5 +1,7 @@
 const express = require('express');
 
+const {body} =  require('express-validator');
+
 const seedController = require('../controllers/seed')
 
 const router = express.Router();
@@ -8,7 +10,15 @@ const router = express.Router();
 // GET /seed/seeds
 router.get('/seeds', seedController.getSeeds);
 
-router.post('/seed', seedController.createSeed);
+// post and validation length of seeds
+router.post('/seed',
+  [
+    body('name')
+      .trim()
+      .isLength({min:5}),
+  ], 
+  seedController.createSeed
+);
 
 module.exports = router;
 

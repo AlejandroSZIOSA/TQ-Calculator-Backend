@@ -2,7 +2,10 @@ const express = require('express');//import
 
 const bodyParser = require('body-parser'); //import
 
-const seedRoutes = require('./routes/seed') //import
+const mongoose = require('mongoose'); //import
+
+const seedRoutes = require('./routes/seed'); //import
+
 
 const app = express();
 
@@ -11,7 +14,7 @@ app.use(bodyParser.json()); //Parse data from incoming requests
 //Fixing CORDS problem in the browser
 app.use((req, res, next) => {
   res.setHeader('Access-Control-allow-origin' , '*');
-  res.setHeader('Access-Control-allow-methods', 'GET,POST,PUT');
+  res.setHeader('Access-Control-allow-methods', 'GET,POST,PUT,DELETE,PATCH');
   res.setHeader('Access-Control-allow-headers', 'Content-Type,Authorization');
   next();//continue
 })
@@ -20,5 +23,11 @@ app.use((req, res, next) => {
 //this is an Express expression
 app.use('/seed',seedRoutes); //Initiating the seed routes
 
-app.listen(8080);//initiating the server
+//mongoose
+mongoose.connect('mongodb+srv://GabrielSA:mSbmr06OD3qkiCZZ@bookdbtest1.nlmcd74.mongodb.net/?retryWrites=true&w=majority')
+.then( result =>{
+  app.listen(8080);
+}).catch(err => console.log(err));
+
+//initiating the server
 
