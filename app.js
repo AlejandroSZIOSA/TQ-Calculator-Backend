@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use('/seed',seedRoutes); //Initiating the seed routes
 
 //mongoose
-mongoose.connect('mongodb+srv://GabrielSA:mSbmr06OD3qkiCZZ@bookdbtest1.nlmcd74.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect() //key!
 .then( result =>{
   app.listen(8080);
 }).catch(err => console.log(err));
