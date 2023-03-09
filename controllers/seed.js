@@ -1,25 +1,24 @@
 //validating The Admin
-const {validationResult} = require('express-validator') 
-//next is a function 
+const {validationResult} = require('express-validator'); 
+ 
 const Seed = require('../models/seed')
+
+//next is a function
 exports.getSeeds = (req,res,next) => {
-//send a response
-// res = response
-  res.status(200).json ({
-      seeds:[
-        { 
-          _id :'1',
-          name: 'First Seed',
-          weightPerSquareMeter:3,
-          // creator:{
-          //   admin:'Gato'
-          // },
-          //creator:'Gato',
-          createdAt: new Date()
-        }
-    ]
-  });
+  Seed.find()
+    .then(seeds =>{
+      res.status(200).json({
+        message:'Fetched seeds successfully',seeds:seeds
+      })
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    })
 };
+
 exports.createSeed = (req,res,next) =>{
   const errors = validationResult(req)
   if(!errors.isEmpty()){
