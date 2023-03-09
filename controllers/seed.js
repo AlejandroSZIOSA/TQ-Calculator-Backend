@@ -14,7 +14,7 @@ exports.getSeeds = (req,res,next) => {
           // creator:{
           //   admin:'Gato'
           // },
-          creator:'Gato',
+          //creator:'Gato',
           createdAt: new Date()
         }
     ]
@@ -32,12 +32,12 @@ exports.createSeed = (req,res,next) =>{
   //parse to json for send and request data :)
   const name = req.body.name;
   const weightPerSquareMeter= req.body.weightPerSquareMeter;
-  const creator = req.body.creator;
+  //const creator = req.body.creator;
     //create post in db
     const seed = new Seed({
       name: name,
       weightPerSquareMeter: weightPerSquareMeter,
-      creator:creator, // todo: refactor!
+      //creator:creator, // todo: refactor!
     });
     //save the data in DB
     seed
@@ -50,6 +50,10 @@ exports.createSeed = (req,res,next) =>{
         });
       })
       .catch(err => {
-        console.log(err);
+        //if there is an error, send it back
+        if(err.statusCode){
+          err.status = 500;
+        }
+        next(err); // goes to the next function error
       })
 };
