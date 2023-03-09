@@ -1,3 +1,5 @@
+require('dotenv').config(); // calling enviroment variables
+
 const express = require('express');//import
 
 const bodyParser = require('body-parser'); //import
@@ -24,7 +26,7 @@ app.use((req, res, next) => {
 app.use('/seed',seedRoutes); //Initiating the seed routes
 
 //mongoose
-mongoose.connect() //key!
+mongoose.connect(process.env.DB_KEY) //key!
 .then( result =>{
   app.listen(8080);
 }).catch(err => console.log(err));
