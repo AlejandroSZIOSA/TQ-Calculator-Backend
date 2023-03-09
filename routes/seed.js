@@ -15,7 +15,7 @@ router.post('/seed',
   [
     body('name')
       .trim()
-      .isLength({max:5}),
+      .isLength({max:10}),
   ], 
   seedController.createSeed
 );

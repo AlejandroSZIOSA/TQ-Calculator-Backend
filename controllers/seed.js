@@ -5,7 +5,7 @@ const Seed = require('../models/seed')
 
 //next is a function
 exports.getSeeds = (req,res,next) => {
-  Seed.find()
+  Seed.find() //find all seeds stored in DB
     .then(seeds =>{
       res.status(200).json({
         message:'Fetched seeds successfully',seeds:seeds
@@ -23,17 +23,19 @@ exports.createSeed = (req,res,next) =>{
   const errors = validationResult(req)
   if(!errors.isEmpty()){
     return res.status(422).json({
-      message:'Validation Failed, Data incorrect',
+      message:'Validation Failed, Seed Name, max length 10',
       errors: errors.array()
     })
   }
 
   //parse to json for send and request data :)
+  const id = req.body.id;
   const name = req.body.name;
   const weightPerSquareMeter= req.body.weightPerSquareMeter;
-  //const creator = req.body.creator;
+  
     //create post in db
     const seed = new Seed({
+      id: id,
       name: name,
       weightPerSquareMeter: weightPerSquareMeter,
       //creator:creator, // todo: refactor!
