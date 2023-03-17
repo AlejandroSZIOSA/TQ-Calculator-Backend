@@ -8,6 +8,9 @@ const mongoose = require('mongoose'); //import
 
 const seedRoutes = require('./routes/seed'); //import
 
+const authRoutes = require('./routes/auth'); //import
+
+
 const app = express();
 
 app.use(bodyParser.json()); //Parse data from incoming requests
@@ -24,11 +27,17 @@ app.use((req, res, next) => {
 //this is an Express expression
 app.use('/seed',seedRoutes); //Initiating the seed routes
 
+
+app.use('/auth',authRoutes); //Initiating the auth routes
+
+
 app.use((error,req,res,next) => {
   console.log(error);
   const status = error.statusCode || 500;
   const message = error.message;
-  res.status(status).json({message: message})
+  const data = error.data; //adding data to the error object
+
+  res.status(status).json({message: message, data:data})
 })
 //mongoose
 mongoose.connect(process.env.DB_KEY) //env key!
