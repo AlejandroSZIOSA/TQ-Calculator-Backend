@@ -29,7 +29,6 @@ router.put(
 );
 
 //Login Authorization Users
-router.post('/login');
-
+router.post('/login',authController.login);
 
 module.exports = router;
