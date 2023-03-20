@@ -15,7 +15,7 @@ router.put(
     .withMessage('Please enter a valid email')
     .custom((value, {req}) => {
       return User.findOne({email: value})
-        .then(user => { 
+        .then(userDoc => { 
           if(userDoc){
             return Promise.reject('Email already exists');
           }
@@ -27,5 +27,9 @@ router.put(
     .isLength({min: 4})
 ], authController.signup
 );
+
+//Login Authorization Users
+router.post('/login');
+
 
 module.exports = router;
