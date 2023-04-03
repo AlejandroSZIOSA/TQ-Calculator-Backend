@@ -10,7 +10,7 @@ const router = express.Router();
 
 //passing a function as second argument
 // GET /seed/seeds
-router.get('/seeds',seedController.getSeeds); //validation isAuth !problem in frontend!
+router.get('/seeds',isAuth, seedController.getSeeds); //validation isAuth !problem in frontend!
 
 // post and validation length of seeds
 router.post('/seed',
