@@ -24,7 +24,7 @@ router.put(
     .normalizeEmail(),
   body('password')
     .trim()
-    .isLength({min: 4})
+    .isLength({max: 20})
 ], authController.signup
 );
 
