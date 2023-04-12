@@ -6,13 +6,13 @@ const authController = require('../controllers/auth');
 
 const router = express.Router();
 
-//Validating Password
+//Create new Users + Validating Password
 router.put(
   '/signup',
   [
   body('email')
     .isEmail()
-    .withMessage('Please enter a valid email')
+    .withMessage('Please enter a valid email') //TODO: problem in frontend App
     .custom((value, {req}) => {
       return User.findOne({email: value})
         .then(userDoc => { 
@@ -20,10 +20,10 @@ router.put(
             return Promise.reject('Email already exists');
           }
       })
-    })
-    .normalizeEmail(),
+    }),
+    //.normalizeEmail(), // fix Frontend problem!
   body('password')
-    .trim()
+    .trim() // eliminate empty spaces 
     .isLength({max: 20})
 ], authController.signup
 );
