@@ -8,11 +8,11 @@ const isAuth = require('../middleware/isAuth')
 
 const router = express.Router();
 
-//passing a function as second argument
+//Passing a function as second argument
 // GET /seed/seeds
-router.get('/seeds',isAuth,seedController.getSeeds); //validation isAuth !problem in frontend!
+router.get('/seeds',isAuth,seedController.getSeeds); //Validation isAuth !problem in frontend!
 
-// post and validation length of seeds
+// Post and validation length of seeds
 router.post('/seed',
   [
     body('name')

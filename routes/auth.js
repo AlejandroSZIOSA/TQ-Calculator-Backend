@@ -1,7 +1,9 @@
 const express = require('express');
+
 const {body} =  require('express-validator');
 
 const User = require('../models/user');
+
 const authController = require('../controllers/auth');
 
 const router = express.Router();
@@ -11,8 +13,8 @@ router.put(
   '/signup',
   [
   body('email')
-    .isEmail()
-    .withMessage('Please enter a valid email') //TODO: problem in frontend App
+    .isEmail() //Control email format
+    .withMessage('Please enter a valid email')
     .custom((value, {req}) => {
       return User.findOne({email: value})
         .then(userDoc => { 
@@ -23,12 +25,12 @@ router.put(
     }),
     //.normalizeEmail(), // fix Frontend problem!
   body('password')
-    .trim() // eliminate empty spaces 
-    .isLength({max: 20})
+    .trim() // Eliminate empty spaces
+    .isLength({max: 20}) //Set max length
 ], authController.signup
 );
 
-//Login Authorization Users
+//Login Auth Users
 router.post('/login',authController.login);
 
 module.exports = router;
