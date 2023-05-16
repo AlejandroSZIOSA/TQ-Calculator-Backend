@@ -15,10 +15,6 @@ const seedSchema = new Schema({
     type: Number,
     required: true
   },
-  // creator:{
-  //   type: String,
-  //   required: true
-  // }
 }, //add data when is object updated ?
 {timestamps : true} //fix problem!
 );
