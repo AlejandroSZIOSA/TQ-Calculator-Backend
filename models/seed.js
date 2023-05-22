@@ -18,5 +18,5 @@ const seedSchema = new Schema({
 },
 {timestamps : true} //This insert Updates information in DB. Can change to false!
 );
-//Create seeds Collection Data in Mongo DB.
+//Create seeds Collection in Mongo DB.
 module.exports = mongoose.model('Seed', seedSchema);

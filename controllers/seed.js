@@ -19,27 +19,25 @@ exports.getSeeds = (req,res,next) => {
     })
 };
 
+//Validation when create seeds (document)
 exports.createSeed = (req,res,next) =>{
   const errors = validationResult(req)
   if(!errors.isEmpty()){
     return res.status(422).json({
-      message:'Validation Failed, Seed Name, max length 10',
+      message:'Validation Failed, Seed Name, max length 15',
       errors: errors.array()
     })
   }
-
   //Parse to json for send and request data :)
   const id = req.body.id;
   const name = req.body.name;
   const weightPerSquareMeter= req.body.weightPerSquareMeter;
-  
     //Create post in db
     const seed = new Seed({
       id: id,
       name: name,
       weightPerSquareMeter: weightPerSquareMeter,
     });
-
     //Save the data in DB
     seed
       .save()

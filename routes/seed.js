@@ -12,7 +12,6 @@ const router = express.Router();
 router.get('/seeds',isAuth,seedController.getSeeds); //Validation isAuth
 
 //Warning: Comment this out! If you want create new seeds(products) using Postman.
-
 /*
 router.post('/seed',
   [

@@ -6,17 +6,15 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
+//Sign Up
 exports.signup  = (req, res, next) => {
-
   const errors= validationResult(req)
-  
   if(!errors.isEmpty()){
     const error = new Error('Validation failed');
     error.statusCode = 422;
     error.data = errors.array();
     throw error;
   }
-
   const email = req.body.email;
   const password = req.body.password;
   bcrypt //Hash the password
@@ -38,6 +36,7 @@ exports.signup  = (req, res, next) => {
       next(err);
     });
 };
+
 //Login Authorization User
 exports.login =(req,res,next) => {
   const email = req.body.email;
@@ -59,14 +58,13 @@ exports.login =(req,res,next) => {
         error.statusCode = 402
         throw error;
       }
-
       //Token
       const token = jwt.sign({
         email: loadedUser.email, 
         userId: loadedUser._id.toString()
-      },'secret',
+      },'secret', //Change this for security
       {expiresIn: '24hr'}
-      ); //Change this security
+      ); 
       res.status(200).json({
         token:token,
         userId:loadedUser._id.toString()});
