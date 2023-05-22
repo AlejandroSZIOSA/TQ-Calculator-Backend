@@ -15,4 +15,5 @@ const userSchema = new Schema({
     default:'I am a new User'
   }
 });
+//Create a the Users Collection Data in Mongo DB.
 module.exports = mongoose.model('Users', userSchema);

@@ -9,18 +9,20 @@ const isAuth = require('../middleware/isAuth')
 const router = express.Router();
 
 //Passing a function as second argument
-// GET /seed/seeds
-router.get('/seeds',isAuth,seedController.getSeeds); //Validation isAuth !problem in frontend!
+router.get('/seeds',isAuth,seedController.getSeeds); //Validation isAuth
 
-// Post and validation length of seeds
+//Warning: Comment this out! If you want create new seeds(products) using Postman.
+
+/*
 router.post('/seed',
   [
     body('name')
-      .trim()
-      .isLength({max:10}),
+      .trim() // Eliminate white spaces
+      .isLength({max:15}),
   ], 
   seedController.createSeed
 );
+*/
 
 module.exports = router;
 

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//Schema ?
+//Schema
 const Schema = mongoose.Schema;
 
 const seedSchema = new Schema({
@@ -15,8 +15,8 @@ const seedSchema = new Schema({
     type: Number,
     required: true
   },
-}, //add data when is object updated ?
-{timestamps : true} //fix problem!
+},
+{timestamps : true} //This insert Updates information in DB. Can change to false!
 );
-//define the name of a Seed Collection in Mongo DB database
+//Create seeds Collection Data in Mongo DB.
 module.exports = mongoose.model('Seed', seedSchema);

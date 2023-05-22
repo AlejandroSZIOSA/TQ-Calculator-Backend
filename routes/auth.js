@@ -26,7 +26,7 @@ router.put(
     //.normalizeEmail(), // fix Frontend problem!
   body('password')
     .trim() // Eliminate empty spaces
-    .isLength({max: 20}) //Set max length
+    .isLength({max: 20}) //Set max password length
 ], authController.signup
 );
 

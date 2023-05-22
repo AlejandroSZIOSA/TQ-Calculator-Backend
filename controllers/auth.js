@@ -51,12 +51,12 @@ exports.login =(req,res,next) => {
           throw error;
         }
         loadedUser = user;
-        return bcrypt.compare(password,user.password) // this will give a promise
+        return bcrypt.compare(password,user.password) //This will give a promise
     })
     .then(isEqual=>{
       if(!isEqual){
         const error = new Error('Wrong password')
-        error.statusCode = 401
+        error.statusCode = 402
         throw error;
       }
 
@@ -66,7 +66,7 @@ exports.login =(req,res,next) => {
         userId: loadedUser._id.toString()
       },'secret',
       {expiresIn: '24hr'}
-      ); //change this :) security
+      ); //Change this security
       res.status(200).json({
         token:token,
         userId:loadedUser._id.toString()});
